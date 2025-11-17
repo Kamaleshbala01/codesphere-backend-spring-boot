@@ -35,4 +35,4 @@ build/
 
 ### Properties ###
 
-/codesphere/src/main/resources/application.properties
+!**/src/main/resources/application.properties
