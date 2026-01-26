@@ -3,12 +3,9 @@
 using namespace std;
 
 int main(){
- string s;
- cin>>s;
+ //write code here
 
- string temp = s;
- reverse(temp.begin(),temp.end());
+ while(true);
 
- cout<<((temp == s) ? "NO" : "YES");
  return 0; 
 }

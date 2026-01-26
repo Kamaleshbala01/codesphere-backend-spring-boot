@@ -14,6 +14,10 @@ public class UserPrinciple implements UserDetails {
         this.user = user;
     }
 
+    public String getUserId(){
+        return user.getId();
+    }
+
     public UserModel getUser(){
         return user;
     }

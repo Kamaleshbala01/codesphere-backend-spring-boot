@@ -26,5 +26,4 @@ public class TestcaseController {
     public ResponseEntity<TestcaseModel> addTestcase(@RequestBody TestcaseModel testcase) {
         return new ResponseEntity<>(testcaseService.add(testcase), HttpStatus.CREATED);
     }
-
 }

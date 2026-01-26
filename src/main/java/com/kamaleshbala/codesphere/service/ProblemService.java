@@ -23,6 +23,7 @@ public class ProblemService {
     }
 
     public ProblemModel getProblemWithSampleTestcase(String id){
+//        return problemRepo.findById(id).orElse(null);
         return problemRepo.findProblemWithSampleTestcases(id, Testcase.SAMPLE);
     }
 }
