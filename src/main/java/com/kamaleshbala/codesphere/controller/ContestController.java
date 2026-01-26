@@ -1,12 +1,15 @@
 package com.kamaleshbala.codesphere.controller;
 
+import com.kamaleshbala.codesphere.DTO.ContestSkeletonDTO;
 import com.kamaleshbala.codesphere.model.ContestModel;
 import com.kamaleshbala.codesphere.model.ProblemModel;
 import com.kamaleshbala.codesphere.service.ContestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("api/contest")
@@ -29,6 +32,13 @@ public class ContestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    // getting overall contest List upcoming, ongoing and pastContest
+
+    @GetMapping("/all")
+    public ResponseEntity<ContestSkeletonDTO> getContestSkeleton() {
+        return new ResponseEntity<>(contestService.getContestSkeleton(), HttpStatus.OK);
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<ContestModel> createContest(@RequestBody ContestModel contest) {

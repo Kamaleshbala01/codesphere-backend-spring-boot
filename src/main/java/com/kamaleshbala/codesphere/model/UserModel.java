@@ -24,6 +24,18 @@ public class UserModel {
     @JsonManagedReference(value = "user-submission")
     private List<SubmissionModel> submissions;
 
+//    public List<ViolationModel> getViolations() {
+//        return violations;
+//    }
+//
+//    public void setViolations(List<ViolationModel> violations) {
+//        this.violations = violations;
+//    }
+//
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonManagedReference(value = "user-violation")
+//    List<ViolationModel> violations;
+
     public String getId() {
         return id;
     }

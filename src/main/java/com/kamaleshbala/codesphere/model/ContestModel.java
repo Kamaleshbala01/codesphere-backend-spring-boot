@@ -88,8 +88,11 @@ public class ContestModel {
     )
     private List<ProblemModel> problems;
 
+//    @OneToMany(mappedBy = "contests", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonManagedReference(value = "contest-violation")
+//    List<ViolationModel> violations;
+
     private Instant startAt;
     private Instant endAt;
     private Duration duration;
-
 }
