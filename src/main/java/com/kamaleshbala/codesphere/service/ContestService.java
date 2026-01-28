@@ -6,12 +6,9 @@ import com.kamaleshbala.codesphere.enums.Testcase;
 import com.kamaleshbala.codesphere.mapper.ContestMapper;
 import com.kamaleshbala.codesphere.model.ContestModel;
 import com.kamaleshbala.codesphere.model.ProblemModel;
-import com.kamaleshbala.codesphere.model.UserPrinciple;
-import com.kamaleshbala.codesphere.model.ViolationModel;
 import com.kamaleshbala.codesphere.repository.ContestRepo;
 import com.kamaleshbala.codesphere.repository.ViolationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -52,7 +49,7 @@ public class ContestService {
     }
 
 
-    // get all contest include (upcoming,past,and ongoing contest
+    // get all contest include (upcoming,past,and ongoing contest)
 
     public ContestSkeletonDTO getContestSkeleton(){
         ContestSkeletonDTO contestSkeleton = new ContestSkeletonDTO();
@@ -78,5 +75,11 @@ public class ContestService {
         contestSkeleton.setPastContests(pastContest);
         contestSkeleton.setUpcomingContests(upcomingContest);
         return contestSkeleton;
+    }
+
+    public ContestDTO getContestDTO(String id){
+        ContestMapper mapper = new ContestMapper();
+        ContestModel contest = contestRepo.findById(id).orElseThrow();
+        return mapper.mapContestDTO(contest);
     }
 }
