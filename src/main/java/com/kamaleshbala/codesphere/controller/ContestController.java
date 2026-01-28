@@ -1,5 +1,6 @@
 package com.kamaleshbala.codesphere.controller;
 
+import com.kamaleshbala.codesphere.DTO.ContestDTO;
 import com.kamaleshbala.codesphere.DTO.ContestSkeletonDTO;
 import com.kamaleshbala.codesphere.model.ContestModel;
 import com.kamaleshbala.codesphere.model.ProblemModel;
@@ -7,7 +8,6 @@ import com.kamaleshbala.codesphere.service.ContestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -37,6 +37,11 @@ public class ContestController {
     @GetMapping("/all")
     public ResponseEntity<ContestSkeletonDTO> getContestSkeleton() {
         return new ResponseEntity<>(contestService.getContestSkeleton(), HttpStatus.OK);
+    }
+
+    @GetMapping("/skeleton/{id}")
+    public ResponseEntity<ContestDTO> getContestDTO(@PathVariable String id){
+        return new ResponseEntity<>(contestService.getContestDTO(id),HttpStatus.OK);
     }
 
 
