@@ -36,6 +36,25 @@ public class UserModel {
 //    @JsonManagedReference(value = "user-violation")
 //    List<ViolationModel> violations;
 
+
+// userAttended Contest
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_contest",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "contest_id")
+    )
+    List<ContestModel> attendedContests;
+
+    public void setAttendedContests(List<ContestModel> attendedContests) {
+        this.attendedContests = attendedContests;
+    }
+
+    public List<ContestModel> getAttendedContests() {
+        return attendedContests;
+    }
+
     public String getId() {
         return id;
     }

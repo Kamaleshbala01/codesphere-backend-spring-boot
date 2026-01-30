@@ -6,9 +6,13 @@ import com.kamaleshbala.codesphere.enums.Testcase;
 import com.kamaleshbala.codesphere.mapper.ContestMapper;
 import com.kamaleshbala.codesphere.model.ContestModel;
 import com.kamaleshbala.codesphere.model.ProblemModel;
+import com.kamaleshbala.codesphere.model.UserModel;
+import com.kamaleshbala.codesphere.model.UserPrinciple;
 import com.kamaleshbala.codesphere.repository.ContestRepo;
+import com.kamaleshbala.codesphere.repository.UserRepo;
 import com.kamaleshbala.codesphere.repository.ViolationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -19,21 +23,30 @@ import java.util.List;
 public class ContestService {
     private final ContestRepo contestRepo;
     private final ViolationRepo violationRepo;
+    private final UserRepo userRepo;
 
     @Autowired
-    public ContestService(ContestRepo contestRepo,ViolationRepo violationRepo) {
+    public ContestService(ContestRepo contestRepo,ViolationRepo violationRepo,UserRepo userRepo) {
         this.contestRepo = contestRepo;
         this.violationRepo = violationRepo;
+        this.userRepo = userRepo;
     }
 
     public ContestModel getContest(String id){
         ContestModel contest =  contestRepo.findById(id).orElseThrow();
-        for(ProblemModel problem : contest.getProblems()){
+        for(ProblemModel problem : contest.getProblems()) {
             problem.setTestcases(
                     problem.getTestcases().stream()
                             .filter(p -> p.getType() == Testcase.SAMPLE)
                             .toList()
             );
+        }
+
+        UserPrinciple userPrinciple = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserModel user = userPrinciple.getUser();
+        if(user.getAttendedContests().isEmpty() || !user.getAttendedContests().contains(contest)) {
+            user.getAttendedContests().add(contest);
+            userRepo.save(user);
         }
         return contest;
     }

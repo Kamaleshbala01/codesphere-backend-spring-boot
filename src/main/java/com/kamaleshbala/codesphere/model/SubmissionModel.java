@@ -38,7 +38,7 @@ public class SubmissionModel {
     @Column(columnDefinition = "TEXT")
     private String code;
 
-    private int totalScore;
+    private int totalScore = 0;
 
     public int getTotalScore() {
         return totalScore;
